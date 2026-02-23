@@ -1,16 +1,19 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+    /* FUNDO VERMELHO */
+    background: linear-gradient(135deg, #8b0000 0%, #ff0000 50%, #ff4d4d 100%);
     min-height: 100vh; color: #fff;
 }
+
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 .header { text-align: center; margin-bottom: 40px; padding: 30px 0; }
-.logo-container h1 { font-size: 2.8rem; font-weight: 700; }
+.logo-container h1 { font-size: 2.8rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
 
 .simulator-card {
     background: rgba(255, 255, 255, 0.95); color: #1f2937;
-    border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
 .simulator-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
@@ -25,7 +28,7 @@ body {
     border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%;
 }
 
-/* Alteração para Tabela VERMELHA */
+/* TABELA VERMELHA */
 .table-container { overflow-x: auto; margin-top: 25px; background: #fff; border-radius: 12px; border: 1px solid #ff0000; }
 table { width: 100%; border-collapse: collapse; }
 th { background: #ff0000; color: #ffffff; padding: 14px; text-align: left; }
