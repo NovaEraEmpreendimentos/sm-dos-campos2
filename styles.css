@@ -1,0 +1,480 @@
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* Mantive o fundo azul global para manter a elegância, mas a tabela será vermelha */
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+    min-height: 100vh;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+}
+
+.logo-container {
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+}
+
+.logo-image {
+    max-width: 200px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Botões */
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    /* Alterado para um tom de vermelho elegante */
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Cards */
+.simulator-section,
+.table-section {
+    margin-bottom: 30px;
+}
+
+.simulator-card,
+.table-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-header i {
+    font-size: 1.5rem;
+    color: #ef4444; /* Ícone vermelho */
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Formulário */
+.simulator-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ef4444; /* Foco vermelho */
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-group select option {
+    background: #1e40af;
+    color: #ffffff;
+}
+
+/* Tabela em Vermelho */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.table-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.filter-tag {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    background: rgba(220, 38, 38, 0.05); /* Fundo avermelhado bem sutil */
+    border: 1px solid rgba(239, 68, 68, 0.3); /* Borda vermelha */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th,
+td {
+    padding: 15px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.2); /* Linha vermelha translúcida */
+}
+
+th {
+    background: rgba(220, 38, 38, 0.8); /* Fundo vermelho do cabeçalho */
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background: rgba(239, 68, 68, 0.15); /* Vermelho no hover */
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(239, 68, 68, 0.05); /* Linhas pares com fundo avermelhado suave */
+}
+
+/* Valores destacados */
+.highlight-value {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.highlight-rate {
+    color: #fca5a5; /* Um vermelho/rosa claro para contrastar bem */
+    font-weight: 600;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%);
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #ef4444; /* Fecha hover vermelho */
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+/* Print Content em Vermelho */
+#printContent {
+    background: #ffffff;
+    color: #1f2937;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.print-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #dc2626; /* Linha vermelha */
+}
+
+.print-logo-image {
+    max-width: 150px;
+    max-height: 60px;
+    object-fit: contain;
+}
+
+.print-section-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.print-section-title h2 {
+    color: #dc2626; /* Título vermelho */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.print-title {
+    color: #dc2626; /* Título vermelho */
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.print-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.print-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #dc2626; /* Borda esquerda vermelha */
+}
+
+.print-section h3 {
+    color: #1f2937;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.print-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.print-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.print-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.print-value {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.print-highlight {
+    background: #fee2e2; /* Fundo vermelho claro */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #fca5a5; /* Borda vermelha */
+}
+
+.print-contact {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .simulator-form {
+        grid-template-columns: 1fr;
+    }
+
+    .header-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .simulator-card,
+    .table-card {
+        padding: 20px;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}

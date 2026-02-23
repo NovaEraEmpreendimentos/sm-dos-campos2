@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gilliard Cred - Simulador</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <h1>Gilliard Cred</h1>
+                <p class="subtitle" style="margin-bottom: 15px; font-weight: 500;">( serviços e soluções financeiras )</p>
+                
+                <div style="font-size: 0.95rem; opacity: 0.9; line-height: 1.6;">
+                    <p><i class="fab fa-whatsapp"></i> Telefone: (82) 9 9330-1661 &nbsp;|&nbsp; <i class="fab fa-instagram"></i> @gilliardfinanceira</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Endereço: R. Dr. Rômulo de almeida 02, Próx aos Correios</p>
+                    <p>São Miguel dos Campos - AL</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="simulator-section">
+            <div class="simulator-card">
+                <div class="card-header">
+                    <i class="fas fa-calculator"></i>
+                    <h2>Simulador</h2>
+                </div>
+
+                <div class="simulator-form">
+                    <div class="form-group">
+                        <label for="cardBrand">Bandeira do Cartão</label>
+                        <select id="cardBrand">
+                            <option value="master_visa">Master/Visa</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanAmount">Valor a Receber</label>
+                        <input type="number" id="loanAmount" placeholder="Digite o valor" min="1" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="installments">Número de Parcelas</label>
+                        <select id="installments">
+                            <option value="">Selecione as parcelas</option>
+                            <option value="1">1x</option>
+                            <option value="2">2x</option>
+                            <option value="3">3x</option>
+                            <option value="4">4x</option>
+                            <option value="5">5x</option>
+                            <option value="6">6x</option>
+                            <option value="7">7x</option>
+                            <option value="8">8x</option>
+                            <option value="9">9x</option>
+                            <option value="10">10x</option>
+                            <option value="11">11x</option>
+                            <option value="12">12x</option>
+                            <option value="13">13x</option>
+                            <option value="14">14x</option>
+                            <option value="15">15x</option>
+                            <option value="16">16x</option>
+                            <option value="17">17x</option>
+                            <option value="18">18x</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-primary" id="generatePrint">
+                        <i class="fas fa-download"></i>
+                        Gerar Print
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Tabela de Simulação</h3>
+                </div>
+
+                <div class="table-container">
+                    <table id="simulationTable">
+                        <thead>
+                            <tr>
+                                <th>Parcelas</th>
+                                <th>Taxa (%)</th>
+                                <th>Valor a Cobrar (R$)</th>
+                                <th>Valor da Parcela (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="printModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="printContent">
+                </div>
+            <div class="modal-actions">
+                <button class="btn-primary" id="downloadPrint">
+                    <i class="fas fa-download"></i>
+                    Baixar Imagem
+                </button>
+                <button class="btn-secondary" id="closePrint">
+                    <i class="fas fa-times"></i>
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
