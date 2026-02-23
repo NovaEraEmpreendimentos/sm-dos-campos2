@@ -1,7 +1,8 @@
+// Novas taxas fornecidas
 const taxas = {
-    1: 7.00, 2: 8.00, 3: 9.00, 4: 10.00, 5: 10.30, 6: 10.90,
-    7: 11.00, 8: 12.00, 9: 12.30, 10: 14.00, 11: 16.00, 12: 17.00,
-    13: 18.00, 14: 19.00, 15: 20.00, 16: 20.30, 17: 20.90, 18: 21.00,
+    1: 10.50, 2: 11.16, 3: 11.63, 4: 12.19, 5: 12.75, 6: 13.22,
+    7: 13.97, 8: 14.44, 9: 14.72, 10: 15.25, 11: 16.03, 12: 16.58,
+    13: 19.40, 14: 19.87, 15: 20.34, 16: 20.81, 17: 21.28, 18: 21.75,
     19: 23.00, 20: 24.00, 21: 25.00
 };
 
@@ -82,7 +83,6 @@ function showPrintModal() {
 
     currentSimulation = { amount, num, valorCobrar, parcela, date: new Date().toLocaleDateString('pt-BR') };
 
-    // Comprovante com texto em PRETO e NEGRITO
     printContent.innerHTML = `
         <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight: bold; color: #000;">
             <div style="font-size: 24px;">Gilliard Cred</div>
@@ -97,11 +97,10 @@ function showPrintModal() {
                 <p>VALOR TOTAL A PAGAR: ${formatCurrency(valorCobrar)}</p>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 10px; font-size: 12px; border-top: 1px solid #000; padding-top: 10px; font-weight: bold; color: #000;">
-            <p>INSTAGRAM: @GILLIARDFINANCEIRA</p>
-            <p>TELEFONE: (82) 9 9330-1661</p>
-            <p>R. DR. RÔMULO DE ALMEIDA 02, PRÓX AOS CORREIOS</p>
-            <p>SÃO MIGUEL DOS CAMPOS</p>
+        <div style="text-align: center; margin-top: 10px; font-size: 11px; border-top: 1px solid #000; padding-top: 10px; font-weight: bold; color: #000;">
+            <p>Telefone: (82) 9 9330-1661 | @gilliardfinanceira</p>
+            <p>Endereço: R. Dr. Rômulo de almeida 02, Próx aos Correios</p>
+            <p>São Miguel dos Campos - AL</p>
         </div>
     `;
     printModal.style.display = 'block';
@@ -112,22 +111,19 @@ function generatePDF() {
     const doc = new jsPDF();
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
-    doc.setTextColor(0, 0, 0); // Texto Preto no PDF
+    doc.setTextColor(0, 0, 0);
     doc.text("Gilliard Cred", 105, 30, { align: "center" });
     doc.setFontSize(12);
     doc.text("( serviços e soluções financeiras )", 105, 38, { align: "center" });
     doc.line(20, 45, 190, 45);
     doc.text(`VALOR SOLICITADO: ${formatCurrency(currentSimulation.amount)}`, 20, 60);
     doc.text(`PLANO: ${currentSimulation.num} PARCELAS`, 20, 70);
-    
     doc.setFillColor(240, 240, 240);
     doc.rect(20, 80, 170, 25, 'F');
     doc.text(`VALOR DA PARCELA: ${formatCurrency(currentSimulation.parcela)}`, 105, 90, { align: "center" });
     doc.text(`TOTAL A PAGAR: ${formatCurrency(currentSimulation.valorCobrar)}`, 105, 100, { align: "center" });
-    
     doc.setFontSize(10);
-    doc.text("INSTAGRAM: @GILLIARDFINANCEIRA | WHATSAPP: (82) 9 9330-1661", 105, 130, { align: "center" });
-    doc.text("R. DR. RÔMULO DE ALMEIDA 02, SÃO MIGUEL DOS CAMPOS", 105, 136, { align: "center" });
-    
+    doc.text("Telefone: (82) 9 9330-1661 | @gilliardfinanceira", 105, 130, { align: "center" });
+    doc.text("Endereço: R. Dr. Rômulo de almeida 02, São Miguel dos Campos - AL", 105, 136, { align: "center" });
     doc.save(`Simulacao_GilliardCred.pdf`);
 }
