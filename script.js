@@ -15,8 +15,6 @@ const downloadPrintBtn = document.getElementById('downloadPrint');
 const closePrintBtn = document.getElementById('closePrint');
 const closeModalSpan = document.querySelector('.close');
 
-let currentSimulation = null;
-
 document.addEventListener('DOMContentLoaded', () => {
     initInstallments();
     updateTable();
@@ -44,7 +42,7 @@ function setupEventListeners() {
 }
 
 function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value || 0);
 }
 
 function updateTable() {
@@ -74,26 +72,24 @@ function showPrintModal() {
     const valorReceber = amount * (1 - taxa / 100);
     const valorCobrar = amount / (1 - taxa / 100);
 
-    currentSimulation = { amount, num };
-
     printContent.innerHTML = `
-        <div id="pdf-area" style="padding: 20px; border: 2px solid #1e40af; border-radius: 10px; background: #fff; color: #000;">
+        <div id="pdf-area" style="padding: 20px; border: 2px solid #ff0000; border-radius: 10px; background: #fff; color: #000;">
             <div style="text-align: center; margin-bottom: 15px;">
-                <h2 style="margin: 0; color: #1e40af;">Gilliard Cred</h2>
+                <h2 style="margin: 0; color: #ff0000;">Gilliard Cred</h2>
                 <p style="font-size: 12px;">( serviços e soluções financeiras )</p>
             </div>
             
-            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; background: #f9fafb;">
-                <p style="font-size: 12px; font-weight: bold; color: #4b5563;">OPÇÃO A: SE VOCÊ PASSAR</p>
+            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; background: #fff5f5;">
+                <p style="font-size: 12px; font-weight: bold; color: #ff0000;">OPÇÃO: SE VOCÊ PASSAR O VALOR</p>
                 <p style="margin: 5px 0;">Valor na Máquina: <strong>${formatCurrency(amount)}</strong></p>
                 <p style="margin: 5px 0;">Você Recebe: <strong style="color: #059669;">${formatCurrency(valorReceber)}</strong></p>
                 <p style="margin: 5px 0;">Parcelas: ${num}x de ${formatCurrency(amount/num)}</p>
             </div>
 
-            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 15px; background: #f9fafb;">
-                <p style="font-size: 12px; font-weight: bold; color: #4b5563;">OPÇÃO B: SE VOCÊ QUER RECEBER LÍQUIDO</p>
+            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 15px; background: #fff5f5;">
+                <p style="font-size: 12px; font-weight: bold; color: #ff0000;">OPÇÃO: SE VOCÊ QUER RECEBER LÍQUIDO</p>
                 <p style="margin: 5px 0;">Valor Desejado: <strong>${formatCurrency(amount)}</strong></p>
-                <p style="margin: 5px 0;">Passar na Máquina: <strong style="color: #dc2626;">${formatCurrency(valorCobrar)}</strong></p>
+                <p style="margin: 5px 0;">Passar na Máquina: <strong style="color: #ff0000;">${formatCurrency(valorCobrar)}</strong></p>
                 <p style="margin: 5px 0;">Parcelas: ${num}x de ${formatCurrency(valorCobrar/num)}</p>
             </div>
 
