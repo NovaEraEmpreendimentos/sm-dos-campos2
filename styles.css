@@ -2,8 +2,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #581c87 100%);
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #8b0000 0%, #ff0000 50%, #ff4d4d 100%);
     min-height: 100vh; color: #fff;
 }
 
@@ -12,10 +11,7 @@ body {
 .logo-container h1 { font-size: 2.8rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
 
 .simulator-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95); color: #1f2937;
     border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
@@ -23,25 +19,24 @@ body {
 .input-with-icon { position: relative; display: flex; align-items: center; }
 .input-with-icon i { position: absolute; left: 15px; color: #9ca3af; }
 .input-with-icon input, .input-with-icon select {
-    width: 100%; padding: 14px 14px 14px 45px; 
-    background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px; color: #fff;
+    width: 100%; padding: 14px 14px 14px 45px; border: 2px solid #e5e7eb; border-radius: 12px;
 }
 
 .btn-success {
-    background: #2563eb; color: #fff; border: none; padding: 15px;
+    background: #059669; color: #fff; border: none; padding: 15px;
     border-radius: 12px; cursor: pointer; font-weight: 700; width: 100%;
 }
 
-.table-container { overflow-x: auto; margin-top: 25px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+/* TABELA VERMELHA */
+.table-container { overflow-x: auto; margin-top: 25px; background: #fff; border-radius: 12px; border: 1px solid #ff0000; }
 table { width: 100%; border-collapse: collapse; }
-th { background: #1e40af; color: #ffffff; padding: 14px; text-align: left; }
-td { padding: 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.highlight { color: #60a5fa; font-weight: 700; }
+th { background: #ff0000; color: #ffffff; padding: 14px; text-align: left; }
+td { padding: 14px; text-align: left; border-bottom: 1px solid #fee2e2; }
+.highlight { color: #ff0000; font-weight: 700; }
 
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
 .modal-content { background: #fff; color: #000; margin: 5% auto; padding: 20px; border-radius: 15px; width: 90%; max-width: 450px; }
 .close { float: right; font-size: 28px; cursor: pointer; }
 .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
-.btn-primary { flex: 1; padding: 12px; background: #1e40af; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+.btn-primary { flex: 1; padding: 12px; background: #ff0000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
 .btn-secondary { flex: 1; padding: 12px; background: #e5e7eb; border: none; border-radius: 8px; cursor: pointer; }
