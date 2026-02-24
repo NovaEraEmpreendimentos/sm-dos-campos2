@@ -1,4 +1,3 @@
-// Novas taxas fornecidas
 const taxas = {
     1: 10.50, 2: 11.16, 3: 11.63, 4: 12.19, 5: 12.75, 6: 13.22,
     7: 13.97, 8: 14.44, 9: 14.72, 10: 15.25, 11: 16.03, 12: 16.58,
@@ -13,6 +12,8 @@ const tableBody = document.getElementById('tableBody');
 const printModal = document.getElementById('printModal');
 const printContent = document.getElementById('printContent');
 const downloadPrintBtn = document.getElementById('downloadPrint');
+const closePrintBtn = document.getElementById('closePrint');
+const closeModalSpan = document.querySelector('.close');
 
 let currentSimulation = null;
 
@@ -33,22 +34,13 @@ function initInstallments() {
 }
 
 function setupEventListeners() {
-    loanAmountInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value === '') { e.target.value = ''; updateTable(); return; }
-        value = (value / 100).toFixed(2);
-        e.target.value = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(value);
-        updateTable();
-    });
-
+    loanAmountInput.addEventListener('input', updateTable);
+    installmentsSelect.addEventListener('change', updateTable);
     generatePrintBtn.addEventListener('click', showPrintModal);
-    document.querySelector('.close').onclick = () => printModal.style.display = 'none';
-    document.getElementById('closePrint').onclick = () => printModal.style.display = 'none';
     downloadPrintBtn.addEventListener('click', generatePDF);
-}
-
-function getRawValue(value) {
-    return value ? parseFloat(value.replace(/\./g, '').replace(',', '.')) : 0;
+    [closePrintBtn, closeModalSpan].forEach(btn => {
+        btn.addEventListener('click', () => printModal.style.display = 'none');
+    });
 }
 
 function formatCurrency(value) {
@@ -56,74 +48,78 @@ function formatCurrency(value) {
 }
 
 function updateTable() {
-    const amount = getRawValue(loanAmountInput.value) || 0;
+    const amount = parseFloat(loanAmountInput.value) || 0;
     tableBody.innerHTML = '';
-    Object.keys(taxas).forEach(num => {
-        const rate = taxas[num];
-        const valorCobrar = amount / (1 - (rate / 100));
+    Object.keys(taxas).forEach(i => {
+        const taxa = taxas[i];
+        const valorReceber = amount * (1 - taxa / 100);
+        const valorCobrar = amount / (1 - taxa / 100);
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${num}x</td><td>${rate.toFixed(2)}%</td>
-            <td>${formatCurrency(amount)}</td><td>${formatCurrency(amount/num)}</td>
+            <td>${i}x</td>
+            <td>${taxa.toFixed(2)}%</td>
+            <td class="highlight">${formatCurrency(valorReceber)}</td>
+            <td>${formatCurrency(amount / i)}</td>
             <td class="highlight">${formatCurrency(valorCobrar)}</td>
-            <td class="highlight">${formatCurrency(valorCobrar/num)}</td>
+            <td>${formatCurrency(valorCobrar / i)}</td>
         `;
         tableBody.appendChild(row);
     });
 }
 
 function showPrintModal() {
-    const amount = getRawValue(loanAmountInput.value);
-    if (!amount || amount <= 0) { alert('Por favor, insira um valor.'); return; }
+    const amount = parseFloat(loanAmountInput.value) || 0;
+    const num = parseInt(installmentsSelect.value);
+    const taxa = taxas[num];
+    const valorReceber = amount * (1 - taxa / 100);
+    const valorCobrar = amount / (1 - taxa / 100);
 
-    const num = installmentsSelect.value;
-    const rate = taxas[num];
-    const valorCobrar = amount / (1 - (rate / 100));
-    const parcela = valorCobrar / num;
-
-    currentSimulation = { amount, num, valorCobrar, parcela, date: new Date().toLocaleDateString('pt-BR') };
+    currentSimulation = { amount, num };
 
     printContent.innerHTML = `
-        <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; font-weight: bold; color: #000;">
-            <div style="font-size: 24px;">Gilliard Cred</div>
-            <div style="font-size: 14px;">( serviços e soluções financeiras )</div>
-        </div>
-        <div style="padding: 20px 0; font-weight: bold; line-height: 1.8; color: #000;">
-            <p>DATA: ${currentSimulation.date}</p>
-            <p>VALOR SOLICITADO: ${formatCurrency(amount)}</p>
-            <p>PLANO: ${num} PARCELAS</p>
-            <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #000;">
-                <p>VALOR DA PARCELA: ${formatCurrency(parcela)}</p>
-                <p>VALOR TOTAL A PAGAR: ${formatCurrency(valorCobrar)}</p>
+        <div id="pdf-area" style="padding: 20px; border: 2px solid #1e40af; border-radius: 10px; background: #fff; color: #000;">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h2 style="margin: 0; color: #1e40af;">Gilliard Cred</h2>
+                <p style="font-size: 12px;">( serviços e soluções financeiras )</p>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 10px; font-size: 11px; border-top: 1px solid #000; padding-top: 10px; font-weight: bold; color: #000;">
-            <p>Telefone: (82) 9 9330-1661 | @gilliardfinanceira</p>
-            <p>Endereço: R. Dr. Rômulo de almeida 02, Próx aos Correios</p>
-            <p>São Miguel dos Campos - AL</p>
+            
+            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 10px; background: #f9fafb;">
+                <p style="font-size: 12px; font-weight: bold; color: #4b5563;">OPÇÃO A: SE VOCÊ PASSAR</p>
+                <p style="margin: 5px 0;">Valor na Máquina: <strong>${formatCurrency(amount)}</strong></p>
+                <p style="margin: 5px 0;">Você Recebe: <strong style="color: #059669;">${formatCurrency(valorReceber)}</strong></p>
+                <p style="margin: 5px 0;">Parcelas: ${num}x de ${formatCurrency(amount/num)}</p>
+            </div>
+
+            <div style="border: 1px solid #ddd; padding: 10px; border-radius: 8px; margin-bottom: 15px; background: #f9fafb;">
+                <p style="font-size: 12px; font-weight: bold; color: #4b5563;">OPÇÃO B: SE VOCÊ QUER RECEBER LÍQUIDO</p>
+                <p style="margin: 5px 0;">Valor Desejado: <strong>${formatCurrency(amount)}</strong></p>
+                <p style="margin: 5px 0;">Passar na Máquina: <strong style="color: #dc2626;">${formatCurrency(valorCobrar)}</strong></p>
+                <p style="margin: 5px 0;">Parcelas: ${num}x de ${formatCurrency(valorCobrar/num)}</p>
+            </div>
+
+            <div style="text-align: center; border-top: 1px solid #eee; padding-top: 10px; font-size: 11px; line-height: 1.5;">
+                <p><strong>Telefone:</strong> (82) 9 9330-1661</p>
+                <p><strong>Instagram:</strong> gilliardfinanceira</p>
+                <p><strong>Endereço:</strong> R. Dr. Rômulo de almeida 02, Próx aos Correios</p>
+                <p>São Miguel dos Campos - AL</p>
+            </div>
         </div>
     `;
     printModal.style.display = 'block';
 }
 
-function generatePDF() {
+async function generatePDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.setTextColor(0, 0, 0);
-    doc.text("Gilliard Cred", 105, 30, { align: "center" });
-    doc.setFontSize(12);
-    doc.text("( serviços e soluções financeiras )", 105, 38, { align: "center" });
-    doc.line(20, 45, 190, 45);
-    doc.text(`VALOR SOLICITADO: ${formatCurrency(currentSimulation.amount)}`, 20, 60);
-    doc.text(`PLANO: ${currentSimulation.num} PARCELAS`, 20, 70);
-    doc.setFillColor(240, 240, 240);
-    doc.rect(20, 80, 170, 25, 'F');
-    doc.text(`VALOR DA PARCELA: ${formatCurrency(currentSimulation.parcela)}`, 105, 90, { align: "center" });
-    doc.text(`TOTAL A PAGAR: ${formatCurrency(currentSimulation.valorCobrar)}`, 105, 100, { align: "center" });
-    doc.setFontSize(10);
-    doc.text("Telefone: (82) 9 9330-1661 | @gilliardfinanceira", 105, 130, { align: "center" });
-    doc.text("Endereço: R. Dr. Rômulo de almeida 02, São Miguel dos Campos - AL", 105, 136, { align: "center" });
-    doc.save(`Simulacao_GilliardCred.pdf`);
+    const area = document.getElementById('pdf-area');
+    
+    const canvas = await html2canvas(area, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+    
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const width = pdf.internal.pageSize.getWidth();
+    const imgWidth = width - 40;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+    pdf.save('Simulacao_GilliardCred.pdf');
 }
